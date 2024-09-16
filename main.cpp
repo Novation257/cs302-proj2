@@ -7,7 +7,7 @@
 #include <strings.h>
 #include <unistd.h>
 #include <cstdlib>
-#include <chrono> // For measuring runtime
+// #include <chrono> // For measuring runtime
 
 #define  MODE_STL       0
 #define  MODE_QSORT     1
@@ -61,7 +61,7 @@ void parse_command_line_options(int argc, char *argv[], int &mode, bool &numeric
 // Main execution --------------------------------------------------------------
 
 int main(int argc, char *argv[]) {
-    std::chrono::time_point start = std::chrono::high_resolution_clock::now(); // Mark start time
+    // std::chrono::time_point start = std::chrono::high_resolution_clock::now(); // Mark start time
 
     int mode = MODE_STL;
     bool numeric = false;
@@ -71,9 +71,9 @@ int main(int argc, char *argv[]) {
     parse_command_line_options(argc, argv, mode, numeric);
 
     while (std::getline(std::cin, line)) {
-      //data.push_front(line);
+      data.push_front(line);
     }
-    /*
+    
     switch (mode) {
         case MODE_STL:
             stl_sort(data, numeric);
@@ -88,7 +88,6 @@ int main(int argc, char *argv[]) {
             quick_sort(data, numeric);
             break;
     }
-    */
 
     for (Node * curr = data.head; curr != NULL; curr = curr->next) {
         if (numeric) {
@@ -98,10 +97,10 @@ int main(int argc, char *argv[]) {
         }
     }
 
-    // Mark end time and calculate total runtime
-    std::chrono::time_point stop = std::chrono::high_resolution_clock::now();
-    std::chrono::milliseconds duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop-start);
-    std::cout << "Runtime: " << duration.count() << "ms" << std::endl;
+    // // Mark end time and calculate total runtime
+    // std::chrono::time_point stop = std::chrono::high_resolution_clock::now();
+    // std::chrono::milliseconds duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop-start);
+    // std::cout << "Runtime: " << duration.count() << "ms" << std::endl;
 
     return 0;
 }

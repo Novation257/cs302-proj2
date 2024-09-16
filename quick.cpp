@@ -14,8 +14,8 @@ Node *concatenate(Node *left, Node *right);
 
 void quick_sort(List &l, bool numeric) {
 	Node *tmp;
-	tmp = qsort(l->head, numeric);
-	l->head = tmp;
+	tmp = qsort(l.head, numeric);
+	l.head = tmp;
 }
 
 
@@ -39,7 +39,7 @@ Node *qsort(Node *head, bool numeric) {
 		}
 	}
 
-	partition(head, pivot, &left, &right, numeric); //split list into right and left lists
+	partition(head, pivot, *&left, *&right, numeric); //split list into right and left lists
 
 	right = qsort(pivot->next, numeric); //return of right side
 	left = qsort(head, numeric); //return of left side
@@ -118,7 +118,7 @@ void partition(Node *head, Node *pivot, Node *&left, Node *&right, bool numeric)
 
 
 		//Now swap two numbers
-		Node *tmp;
+		Node *tmp = new Node;
 
 		tmp->number = left->number; //save left's data into temporary node
 		tmp->string = left->string;
@@ -130,7 +130,7 @@ void partition(Node *head, Node *pivot, Node *&left, Node *&right, bool numeric)
 		right->string = tmp->string;
 	}
 
-	break;
+	return;
 
 }
 
