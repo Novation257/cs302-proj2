@@ -7,6 +7,7 @@
 #include <strings.h>
 #include <unistd.h>
 #include <cstdlib>
+#include <chrono> // For measuring runtime
 
 #define  MODE_STL       0
 #define  MODE_QSORT     1
@@ -60,6 +61,8 @@ void parse_command_line_options(int argc, char *argv[], int &mode, bool &numeric
 // Main execution --------------------------------------------------------------
 
 int main(int argc, char *argv[]) {
+    std::chrono::time_point start = std::chrono::high_resolution_clock::now(); // Mark start time
+
     int mode = MODE_STL;
     bool numeric = false;
     List data;
@@ -95,6 +98,10 @@ int main(int argc, char *argv[]) {
         }
     }
 
+    // Mark end time and calculate total runtime
+    std::chrono::time_point stop = std::chrono::high_resolution_clock::now();
+    std::chrono::milliseconds duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop-start);
+    std::cout << "Runtime: " << duration.count() << "ms" << std::endl;
 
     return 0;
 }
