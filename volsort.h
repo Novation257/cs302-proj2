@@ -27,6 +27,7 @@ struct List {
 
       nn->next = head; // Set new node's pointer to the current head (will be null if LL is empty)
       head = nn;       // Set the LL's head node to the new node (push front)
+      size++;          // Incrament size
     }
 };
 
