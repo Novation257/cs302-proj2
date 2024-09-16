@@ -1,72 +1,106 @@
 // main.cpp
+
 #include "volsort.h"
+
 #include <iostream>
-#include <cstdlib>
+
 #include <strings.h>
 #include <unistd.h>
-using namespace std;
+#include <cstdlib>
+// #include <chrono> // For measuring runtime
 
-#define MODE_STL       0
-#define MODE_QSORT     1
-#define MODE_MERGE     2
-#define MODE_QUICK     3
-#define MODE_OBLIVIOUS 4
+#define  MODE_STL       0
+#define  MODE_QSORT     1
+#define  MODE_MERGE     2
+#define  MODE_QUICK     3
+#define  MODE_OBLIVIOUS 4
+
+// Utility functions -----------------------------------------------------------
 
 void usage(int status) {
-    cout << "usage: volsort" << endl
-              << "  -m MODE   Sorting mode (oblivious, stl, qsort, merge, quick)" << endl
-              << "  -n        Perform numerical ordering" << endl;
+    std::cout << "usage: volsort" << std::endl
+              << "    -m MODE   Sorting mode (oblivious, stl, qsort, merge, quick)" << std::endl
+              << "    -n        Perform numerical ordering"              << std::endl;
+    
     exit(status);
 }
 
 void parse_command_line_options(int argc, char *argv[], int &mode, bool &numeric) {
     int c;
+
     while ((c = getopt(argc, argv, "hm:n")) != -1) {
         switch (c) {
             case 'm':
-	@@ -39,8 +32,8 @@ void parse_command_line_options(int argc, char *argv[], int &mode, bool &numeric
+                if (strcasecmp(optarg, "stl") == 0) {
+                    mode = MODE_STL;
+                } else if (strcasecmp(optarg, "qsort") == 0) {
+                    mode = MODE_QSORT;
+                } else if (strcasecmp(optarg, "merge") == 0) {
                     mode = MODE_MERGE;
                 } else if (strcasecmp(optarg, "quick") == 0) {
                     mode = MODE_QUICK;
-                } else if (strcasecmp(optarg, "oblivious") == 0) {
-                    mode = MODE_OBLIVIOUS;
+		} else if (strcasecmp(optarg, "oblivious") == 0) {
+		  mode = MODE_OBLIVIOUS;
                 } else {
                     usage(1);
                 }
-	@@ -58,22 +51,18 @@ void parse_command_line_options(int argc, char *argv[], int &mode, bool &numeric
+                break;
+            case 'n':
+                numeric = true;
+                break;
+            case 'h':
+                usage(0);
+                break;
+            default:
+                usage(1);
+                break;
+        }
     }
 }
 
+// Main execution --------------------------------------------------------------
+
 int main(int argc, char *argv[]) {
+    // std::chrono::time_point start = std::chrono::high_resolution_clock::now(); // Mark start time
+
     int mode = MODE_STL;
     bool numeric = false;
     List data;
-    string line;
-
+    std::string line;
+    
     parse_command_line_options(argc, argv, mode, numeric);
 
-    while (getline(cin, line)) {
-        data.push_front(line);
+    while (std::getline(std::cin, line)) {
+      data.push_front(line);
     }
-
+    
     switch (mode) {
         case MODE_STL:
             stl_sort(data, numeric);
-	@@ -87,21 +76,17 @@ int main(int argc, char *argv[]) {
+            break;
+        case MODE_QSORT:
+            qsort_sort(data, numeric);
+            break;
+        case MODE_MERGE:
+            merge_sort(data, numeric);
+            break;
         case MODE_QUICK:
             quick_sort(data, numeric);
             break;
-        case MODE_OBLIVIOUS:
-            break;
     }
 
-    for (Node *curr = data.head; curr != nullptr; curr = curr->next) {
+    for (Node * curr = data.head; curr != NULL; curr = curr->next) {
         if (numeric) {
-            cout << curr->number << endl;
+            std::cout << curr->number << std::endl;
         } else {
-            cout << curr->string << endl;
+            std::cout << curr->string << std::endl;
         }
     }
+
+    // // Mark end time and calculate total runtime
+    // std::chrono::time_point stop = std::chrono::high_resolution_clock::now();
+    // std::chrono::milliseconds duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop-start);
+    // std::cout << "Runtime: " << duration.count() << "ms" << std::endl;
 
     return 0;
 }
