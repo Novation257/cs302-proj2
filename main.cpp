@@ -1,33 +1,27 @@
 // main.cpp
-
 #include "volsort.h"
-
 #include <iostream>
-
+#include <cstdlib>
 #include <strings.h>
 #include <unistd.h>
 #include <cstdlib>
-// #include <chrono> // For measuring runtime
+#include <chrono> // For measuring runtime
 
-#define  MODE_STL       0
-#define  MODE_QSORT     1
-#define  MODE_MERGE     2
-#define  MODE_QUICK     3
-#define  MODE_OBLIVIOUS 4
-
-// Utility functions -----------------------------------------------------------
+#define MODE_STL       0
+#define MODE_QSORT     1
+#define MODE_MERGE     2
+#define MODE_QUICK     3
+#define MODE_OBLIVIOUS 4
 
 void usage(int status) {
-    std::cout << "usage: volsort" << std::endl
-              << "    -m MODE   Sorting mode (oblivious, stl, qsort, merge, quick)" << std::endl
-              << "    -n        Perform numerical ordering"              << std::endl;
-    
+    cout << "usage: volsort" << endl
+              << "  -m MODE   Sorting mode (oblivious, stl, qsort, merge, quick)" << endl
+              << "  -n        Perform numerical ordering" << endl;
     exit(status);
 }
 
 void parse_command_line_options(int argc, char *argv[], int &mode, bool &numeric) {
     int c;
-
     while ((c = getopt(argc, argv, "hm:n")) != -1) {
         switch (c) {
             case 'm':
@@ -39,8 +33,8 @@ void parse_command_line_options(int argc, char *argv[], int &mode, bool &numeric
                     mode = MODE_MERGE;
                 } else if (strcasecmp(optarg, "quick") == 0) {
                     mode = MODE_QUICK;
-		} else if (strcasecmp(optarg, "oblivious") == 0) {
-		  mode = MODE_OBLIVIOUS;
+                } else if (strcasecmp(optarg, "oblivious") == 0) {
+                    mode = MODE_OBLIVIOUS;
                 } else {
                     usage(1);
                 }
@@ -58,22 +52,20 @@ void parse_command_line_options(int argc, char *argv[], int &mode, bool &numeric
     }
 }
 
-// Main execution --------------------------------------------------------------
-
 int main(int argc, char *argv[]) {
-    // std::chrono::time_point start = std::chrono::high_resolution_clock::now(); // Mark start time
+    std::chrono::time_point start = std::chrono::high_resolution_clock::now(); // Mark start time
 
     int mode = MODE_STL;
     bool numeric = false;
     List data;
-    std::string line;
-    
+    string line;
+
     parse_command_line_options(argc, argv, mode, numeric);
 
     while (std::getline(std::cin, line)) {
-      data.push_front(line);
+      //data.push_front(line);
     }
-    
+    /*
     switch (mode) {
         case MODE_STL:
             stl_sort(data, numeric);
@@ -87,20 +79,22 @@ int main(int argc, char *argv[]) {
         case MODE_QUICK:
             quick_sort(data, numeric);
             break;
+        case MODE_OBLIVIOUS:
+            break;
     }
 
-    for (Node * curr = data.head; curr != NULL; curr = curr->next) {
+    for (Node *curr = data.head; curr != nullptr; curr = curr->next) {
         if (numeric) {
-            std::cout << curr->number << std::endl;
+            cout << curr->number << endl;
         } else {
-            std::cout << curr->string << std::endl;
+            cout << curr->string << endl;
         }
     }
 
-    // // Mark end time and calculate total runtime
-    // std::chrono::time_point stop = std::chrono::high_resolution_clock::now();
-    // std::chrono::milliseconds duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop-start);
-    // std::cout << "Runtime: " << duration.count() << "ms" << std::endl;
+    // Mark end time and calculate total runtime
+    std::chrono::time_point stop = std::chrono::high_resolution_clock::now();
+    std::chrono::milliseconds duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop-start);
+    std::cout << "Runtime: " << duration.count() << "ms" << std::endl;
 
     return 0;
 }
