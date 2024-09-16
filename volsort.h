@@ -35,7 +35,12 @@ struct List {
 bool node_number_compare(const Node *a, const Node *b); 	//implement in list.cpp to avoid compile-time issues, used by quick, merge and stl - COMPLETED
 bool node_string_compare(const Node *a, const Node *b);		//implement in list.cpp to avoid compile-time issues, merge and stl - COMPLETED
 
-void dump_node(Node *n);					// implement in this file (volsort.h) to make it easier for TAs to grade
+void dump_node(Node *n) { // implement in this file (volsort.h) to make it easier for TAs to grade
+    for (Node *head = n; head->next != NULL; n = n->next) {
+        cout << n->number << " ";
+    }
+    cout << endl;
+}
 
 void stl_sort(List &l, bool numeric);	// define in stl.cpp - sort using std::sort
 void qsort_sort(List &l, bool numeric);	// define in qsort.cpp - sort using qsort from cstdlib
