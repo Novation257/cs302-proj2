@@ -89,17 +89,17 @@ int main(int argc, char *argv[]) {
             break;
     }
     
-    std::cout << "Completed sorting" << std::endl; // For debugging
+    //std::cout << "Completed sorting" << std::endl; // For debugging
 
-    // for (Node * curr = data.head; curr != NULL; curr = curr->next) {
-    //     if (numeric) {
-    //         std::cout << curr->number << std::endl;
-    //     } else {
-    //         std::cout << curr->string << std::endl;
-    //     }
-    // }
+     for (Node * curr = data.head; curr != NULL; curr = curr->next) {
+         if (numeric) {
+             std::cout << curr->number << std::endl;
+         } else {
+             std::cout << curr->string << std::endl;
+         }
+     }
 
-    Node * curr = data.head;
+/*	   Node * curr = data.head;
     for (int i = 0; i < 5; i++) {
     if (numeric) {
         std::cout << curr->number << std::endl;
@@ -107,7 +107,7 @@ int main(int argc, char *argv[]) {
         std::cout << curr->string << std::endl;
     }
     curr = curr->next;
-}
+}*/
 
     // // Mark end time and calculate total runtime
     // std::chrono::time_point stop = std::chrono::high_resolution_clock::now();

@@ -14,7 +14,7 @@ struct Node {
 
 struct List {
     Node       *head;
-    size_t      size;
+    size_t      size=0;
 
     List(); 					// define in list.cpp - COMPLETED
     ~List();					// define in list.cpp - COMPLETED

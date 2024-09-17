@@ -14,25 +14,33 @@ void stl_sort(List &l, bool numeric) {
     Node* current = l.head;
     Node* end;
     size_t index = 0;
+
     while (current != NULL) {
-        nodes[index++] = current;
-        if(current->next == NULL) end = current; // Mark end of linked list
+        nodes[index] = current;
+		index++;
         current = current->next;
     }
+	
+	//	std::cout<< "checkpoint" << std::endl;
 
     // Sort the array using std::sort and the appropriate comparison function
+	
+	//std::cout << l.size << std::endl;
+
+	
     if (numeric) {
-        std::sort(nodes, &end, node_number_compare);
+        std::sort(nodes, nodes + l.size, node_number_compare);
     } 
     else {
-        std::sort(nodes, &end, node_string_compare);
+        std::sort(nodes, nodes + l.size, node_string_compare);
     }
-    
-    std::cout << "Checkpoint" << std::endl; // For debugging
+	/*while (true) {
+	std::cout << nodes[4]->string;
+	}*/
 
     // Reconstruct the linked list by updating the next pointers
-    for (size_t i = 0; i < l.size - 2; ++i) {
-        nodes[i]->next = nodes[i + 1];
+    for (size_t i = 0; i < l.size - 1; i++) {
+        nodes[i]->next = nodes[i+1];
     }
     nodes[l.size - 1]->next = NULL; // Last node should point to NULL
     
