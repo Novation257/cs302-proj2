@@ -12,6 +12,7 @@ void stl_sort(List &l, bool numeric) {
     
     // Fill the array with pointers to each node in the list
     Node* current = l.head;
+    Node* end;
     size_t index = 0;
 
     while (current != NULL) {
@@ -28,10 +29,10 @@ void stl_sort(List &l, bool numeric) {
 
 	
     if (numeric) {
-        std::sort(nodes, nodes + l.size, node_number_compare_lt);
+        std::sort(nodes, nodes + l.size, node_number_compare);
     } 
     else {
-        std::sort(nodes, nodes + l.size, node_string_compare_lt);
+        std::sort(nodes, nodes + l.size, node_string_compare);
     }
 	/*while (true) {
 	std::cout << nodes[4]->string;
