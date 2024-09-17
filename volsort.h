@@ -34,10 +34,8 @@ struct List {
 
 // Functions -------------------------------------------------------------------
 
-bool node_number_compare_lt(const Node *a, const Node *b); 	//implement in list.cpp to avoid compile-time issues, used by quick, merge and stl - COMPLETED
-bool node_number_compare_gt(const Node *a, const Node *b); 	//implement in list.cpp to avoid compile-time issues, used by quick, merge and stl - COMPLETED
-bool node_string_compare_gt(const Node *a, const Node *b);  //implement in list.cpp to avoid compile-time issues, merge and stl - COMPLETED
-bool node_string_compare_lt(const Node *a, const Node *b);  //implement in list.cpp to avoid compile-time issues, merge and stl - COMPLETED
+bool node_number_compare(const Node *a, const Node *b); 	//implement in list.cpp to avoid compile-time issues, used by quick, merge and stl - COMPLETED
+bool node_string_compare(const Node *a, const Node *b);		//implement in list.cpp to avoid compile-time issues, merge and stl - COMPLETED
 
 // void dump_node(Node *n) { // implement in this file (volsort.h) to make it easier for TAs to grade
 //     for (Node *head = n; head->next != NULL; n = n->next) {

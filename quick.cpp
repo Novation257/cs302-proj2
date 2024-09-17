@@ -66,11 +66,11 @@ void partition(Node *head, Node *pivot, Node *&left, Node *&right, bool numeric)
 		while (true) {
 
 			if (numeric == true) {
-				tORf = node_number_compare_gt(left, pivot);
+				tORf = node_number_compare(left, pivot);
 			}
 
 			else {
-				tORf = node_string_compare_gt(left, pivot);
+				tORf = node_string_compare(left, pivot);
 			}
 
 			if (tORf == true) {
@@ -92,11 +92,11 @@ void partition(Node *head, Node *pivot, Node *&left, Node *&right, bool numeric)
 
 
 			if (numeric == true) {
-				tORf = node_number_compare_gt(pivot, right);
+				tORf = node_number_compare(pivot, right);
 			}
 
 			else {
-				tORf = node_string_compare_gt(pivot, right);
+				tORf = node_string_compare(pivot, right);
 			}
 
 			if (tORf == true) {
