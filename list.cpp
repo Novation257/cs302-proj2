@@ -18,11 +18,20 @@ List::~List() {
 }
 
 // Compares the int values stored in two nodes - returns true if a > b
-bool node_number_compare(const Node *a, const Node *b) {
+bool node_number_compare_gt(const Node *a, const Node *b) {
     return(a->number > b->number);
 }
 
+bool node_number_compare_lt(const Node *a, const Node *b) {
+    return(a->number < b->number);
+}
+
 // Compares the strings stored in two nodes - returns true if a > b
-bool node_string_compare(const Node *a, const Node *b) {
+bool node_string_compare_gt(const Node *a, const Node *b) {
     return(a->string > b->string);
+}
+
+// Compares the strings stored in two nodes - returns true if a > b
+bool node_string_compare_lt(const Node *a, const Node *b) {
+    return(a->string < b->string);
 }

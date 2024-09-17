@@ -29,10 +29,10 @@ void stl_sort(List &l, bool numeric) {
 
 	
     if (numeric) {
-        std::sort(nodes, nodes + l.size, node_number_compare);
+        std::sort(nodes, nodes + l.size, node_number_compare_lt);
     } 
     else {
-        std::sort(nodes, nodes + l.size, node_string_compare);
+        std::sort(nodes, nodes + l.size, node_string_compare_lt);
     }
 	/*while (true) {
 	std::cout << nodes[4]->string;

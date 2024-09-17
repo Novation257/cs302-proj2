@@ -7,14 +7,14 @@
 #include <iostream>
 
 // Comparison function for numeric sorting with qsort - suggestion from class notes
-int qsort_number_compare(const void *a, const void *b) {
+int qsort_number_compare_gt(const void *a, const void *b) {
     Node *nodeA = *(Node **)a;
     Node *nodeB = *(Node **)b;
     return nodeA->number - nodeB->number;
 }
 
 // Comparison function for string sorting - suggestion from class notes
-int qsort_string_compare(const void *a, const void *b) {
+int qsort_string_compare_gt(const void *a, const void *b) {
     Node *nodeA = *(Node **)a;
     Node *nodeB = *(Node **)b;
     return nodeA->string.compare(nodeB->string);
@@ -36,10 +36,10 @@ void qsort_sort(List &l, bool numeric) {
     
     // Sort the array using std::sort and the appropriate comparison function
     if (numeric) {
-        std::qsort(nodes, l.size, sizeof(Node*), qsort_number_compare);
+        std::qsort(nodes, l.size, sizeof(Node*), qsort_number_compare_gt);
     } 
     else {
-        std::qsort(nodes, l.size, sizeof(Node*), qsort_string_compare);
+        std::qsort(nodes, l.size, sizeof(Node*), qsort_string_compare_gt);
     }
     
     // Reconstruct the linked list by updating the next pointers
