@@ -14,6 +14,7 @@ Node *concatenate(Node *left, Node *right);
 
 void quick_sort(List &l, bool numeric) {
 	Node *tmp;
+	//std::cout << "checkpoint: " << std::endl;
 	tmp = qsort(l.head, numeric);
 	l.head = tmp;
 }
@@ -57,8 +58,19 @@ void partition(Node *head, Node *pivot, Node *&left, Node *&right, bool numeric)
 
 	while (true) {
 
-		//break if left's index greater than right's
+		//break if left's index equal to the right's, 
+		
+		if (left == right) {
+			head = pivot->next;
+			pivot->next = left->next;
+			left->next = pivot;
+			break;
+		}
+
 		if (left >= right) {
+			head = pivot->next;
+			right->next = pivot;
+			pivot->next = right;
 			break;
 		}
 
