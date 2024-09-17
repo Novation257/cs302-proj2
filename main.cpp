@@ -5,6 +5,7 @@
 #include <iostream>
 
 #include <strings.h>
+#include <string>
 #include <unistd.h>
 #include <cstdlib>
 // #include <chrono> // For measuring runtime
@@ -93,7 +94,8 @@ int main(int argc, char *argv[]) {
 
      for (Node * curr = data.head; curr != NULL; curr = curr->next) {
          if (numeric) {
-             std::cout << curr->number << std::endl;
+            // printf("%d\n", curr->number);
+             std::cout << curr->number << std::endl; //TODO: change back to curr->number
          } else {
              std::cout << curr->string << std::endl;
          }

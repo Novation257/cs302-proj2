@@ -22,6 +22,7 @@ void quick_sort(List &l, bool numeric) {
 
 
 Node *qsort(Node *head, bool numeric) {
+	if(head == NULL) return NULL;	// Base case
 
 	Node *ptr = head;
 	Node *pivot;
@@ -30,23 +31,25 @@ Node *qsort(Node *head, bool numeric) {
 	Node *left;
 	Node *right; 
 
-	left = ptr->next; //The left pointer is the "next" Node in the list
+	// left = ptr->next; //The left pointer is the "next" Node in the list
 
-	//right is the last node in the list
-	for (ptr = head; ptr != NULL; ptr = ptr->next) {
-		if ((ptr->next) == NULL) {
-			right = ptr;
-			break;
-		}
-	}
+	// //right is the last node in the list
+	// for (ptr = head; ptr != NULL; ptr = ptr->next) {
+	// 	if ((ptr->next) == NULL) {
+	// 		right = ptr;
+	// 		break;
+	// 	}
+	// }
 
 	partition(head, pivot, *&left, *&right, numeric); //split list into right and left lists
 
-	right = qsort(pivot->next, numeric); //return of right side
-	left = qsort(head, numeric); //return of left side
+	right = qsort(right, numeric); //return of right side
+	left = qsort(left, numeric); //return of left side
 
+	// Concatenate left, pivot, and right
+	pivot->next = right;
+	head = concatenate(left, pivot);
 
-	head = concatenate(left, right); //concatenate right and left nodes
 	return head; //ultimately return head of list
 }
 
@@ -149,11 +152,11 @@ void partition(Node *head, Node *pivot, Node *&left, Node *&right, bool numeric)
 
 
 Node *concatenate(Node *left, Node *right) {
+	if(&*left == NULL) return right;
 
 	//sets left's last element's next pointer equal to right's first element. Returns 
 	//the head Node (left's first element)
 	Node *ptr;
-
 	for (ptr = left; ptr != NULL; ptr = ptr->next) {
 		if (ptr->next == NULL) {
 			ptr->next = right;

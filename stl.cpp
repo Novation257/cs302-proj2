@@ -12,7 +12,6 @@ void stl_sort(List &l, bool numeric) {
     
     // Fill the array with pointers to each node in the list
     Node* current = l.head;
-    Node* end;
     size_t index = 0;
 
     while (current != NULL) {
