@@ -17,12 +17,12 @@ List::~List() {
     }
 }
 
-// Compares the int values stored in two nodes - returns true if a > b
+// Compares the int values stored in two nodes - returns true if a < b
 bool node_number_compare(const Node *a, const Node *b) {
     return(a->number < b->number);
 }
 
-// Compares the strings stored in two nodes - returns true if a > b
+// Compares the strings stored in two nodes - returns true if a < b
 bool node_string_compare(const Node *a, const Node *b) {
     return(a->string < b->string);
 }
