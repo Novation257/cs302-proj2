@@ -24,9 +24,10 @@ Node *qsort(Node *head, bool numeric) {
 	if(head == NULL) return NULL;	// Base case
 
 	Node *pivot = head; // Make pivot the first node in the LL(acts as single node)
-	Node *left, *right; // Create left and right pointers(act as LLs)
+	Node *left = NULL; // Create left and right pointers(act as LLs)
+	Node *right = NULL;
 
-	partition(head->next, pivot, *&left, *&right, numeric); //split list into right and left lists
+	partition(head->next, pivot, left, right, numeric); //split list into right and left lists
 
 	left = qsort(left, numeric); //sort left side 
 	right = qsort(right, numeric); //sort right side
@@ -44,21 +45,19 @@ void partition(Node *head, Node *pivot, Node *&left, Node *&right, bool numeric)
 	Node *curr = head;
 
 	while(curr != NULL) {
-		std::cout << "started sort cycle" << std::endl;
-		Node *nextNode = curr->next; // Store next node, as curr->next gets overwritten
-		std::cout << "stored next" << std::endl;
-		std::cout << pivot->number << " starting sort " << curr->number << std::endl;
+		// Store next node, as curr->next gets overwritten
+		Node *nextNode;
+		nextNode = curr->next;
+		
 		// If current is less than the pivot (according to selected comparison function), push_front to left sublist
-		if(( (numeric && node_number_compare(curr, pivot)) || (!numeric && node_string_compare(curr,pivot)) )) { 
+		if(( (numeric && node_number_compare(curr, pivot)) || (!numeric && node_string_compare(curr, pivot)) )) { 
 			curr->next = left;
 			left = curr;
 		} else { // Else, push_front to right sublist
 			curr->next = right;
 			right = curr;
 		}
-		std::cout << "ended sort" << std::endl;
 		curr = nextNode; // Move to next node in LL
-		std::cout << "ended sort cycle" << std::endl;
 	}
 	return;
 }
