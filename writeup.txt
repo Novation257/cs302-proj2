@@ -1,0 +1,28 @@
+COSC302 Project 2
+Nic Dawson, Julianna Prater, Mabry Runnels, and Ryan Wolpert
+9.18.2024
+Dr. Scott Emrich
+
+1. Discuss the relative performance of each sorting method and try to explain the differences.
+	For smaller inputs, the performance of STL, merge sort, qsort, and quicksort tends to be similar. This is because the overhead of sorting is not substantial when dealing with a small number of elements. However, as input sizes grow, differences become more pronounced. STL performs well across different input file sizes, but may not always be the fastest for very large datasets due to it having the same time complexity and similar behavior to quicksort. Mergesort also consistently performs well, especially with larger datasets, because of its O(n log n) time complexity. It divides the list into smaller sublists and merges them back efficiently. Its key advantage over quicksort is stability and it avoids the worst-case performance issues of quicksort. While its time complexity and stability make it good for handling large datasets, it requires more space (O(n)) for the merging process. Quicksort performs similarly well for many types of input, generally having an O(n log n) time complexity. However, its worst-case time complexity is O(n²), which can be a drawback for datasets that are already sorted or nearly sorted. Despite this, quicksort is often faster than merge sort for average cases due to fewer data movements and better cache locality. Qsort is quicksort-based but might not work as well as STL, as it was often slightly slower than STL when tested. These differences come from how recursive algorithms handle large datasets as compared to iterative ones. Quicksort and mergesort both use divide-and-conquer techniques that break the problem down into smaller subproblems, which is a more efficient way to handle large inputs.
+
+2. What do these results reveal about the relationship between theoretical complexity discussed in class and actual performance?
+	The theoretical complexity of sorting algorithms predicts how they should perform relative to each other. Below please find the time complexity for each algorithm in Big O notation:
+- STL: O(n log n) expected time complexity.
+- Merge: O(n log n) in the best, worst, and average cases.
+- Quick: O(n log n) on average, but O(n²) in the worst case.
+- Qsort: Similar to quicksort with O(n log n) on average and O(n²) in the worst case.
+SOURCE: Stack Overflow; Geeks for Geeks
+
+However, in practice, the differences between these time complexities become more pronounced with large datasets. The space required for recursive function calls is offset by the efficiency of the divide-and-conquer approach taken by these algorithms. However, input size also adds another layer of complexity in the form of memory size. Recursive sorts like mergesort and quicksort appear to leverage better cache locality, which is the tendency to access the same or similar data in the cache. This contributes to their efficiency as compared to STL and qsort.
+SOURCE: https://marz.utk.edu/my-courses/cosc230/book/computer-components/
+Mergesort’s stability, the property of preserving order of elements, makes it especially useful for datasets such as large ones or those with repeating values. However, the extra needed memory could be a disadvantage in situations such as those with small datasets, those with only unique values, and environments where memory is limited.
+
+
+3. In your opinion, which sorting mode is the best? Justify your conclusion by examining the trade-offs for the chosen mode.
+	While all four would work equally well for a small dataset, looking at the results of the Unix time fuction, for large datasets, merge seems to be the best choice overall. Although it requires more space to account for the division an merging, it consistently performs well regardless of the dataset size. While quicksort is generally faster than mergesort in average cases, it can be risky due to its worst-case performance of O(n²). However, quicksort is more suitable for environments where memory usage is a concern, as it does not use extra space for manipulating the input like mergesort. While STL is a safe option for many cases, it might not outperform specialized algorithms like mergesort or quicksort for extremely large inputs. Qsort is typically slower than STL, and it could be used in environments where the C library is preferred, but STL is better for most C++ programs.
+
+4. In addition to the questions, please provide a brief summary of each individual group members contributions to the project.
+	Nic tested the relative performance of each function, wrote the linked list class and the additions to volsort, and created the GitHub repository. I 	created mergesort, the main function, the Markdown table, and the lab report. Mabry wrote quicksort, and Ryan wrote oblivious, STL, and qsort.
+
+
